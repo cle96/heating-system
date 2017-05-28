@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeatingSystemAdministration"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="530">
     <Grid Name="grid1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="223*"/>
-            <ColumnDefinition Width="295*"/>
+            <ColumnDefinition Width="230*"/>
+            <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
+        
         <ListBox Name="CustomersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" SelectionChanged="CustomersListBox_SelectedIndexChanged"  Margin="5,5,0,10"  />
         <StackPanel Grid.Column="1" Margin="5">
             <ListBox Name="MetersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="269" Margin="5,5,0,5.4" Height="86" />
@@ -19,6 +20,5 @@
                 <Button x:Name="BtnCreateMeter" Content="Create new Meter" Width="121" HorizontalAlignment="Right" Margin="0,5,10,5" Click="BtnCreateMeter_Click"/>
             </Grid>
         </StackPanel>
-
     </Grid>
 </Window>

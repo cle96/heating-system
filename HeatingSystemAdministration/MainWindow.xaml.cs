@@ -38,11 +38,14 @@ namespace HeatingSystemAdministration
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
+            Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm();
+            cw.Show();
+            
             //Product product = (Product)lBoxProducts.SelectedItem;
-           // if (product != null)
-              //  MessageBox.Show("SelectedItem: type=" + product.GetType() + "\n" + product);
-           // else
-                //MessageBox.Show("SelectedItem: null");
+            // if (product != null)
+            //  MessageBox.Show("SelectedItem: type=" + product.GetType() + "\n" + product);
+            // else
+            //MessageBox.Show("SelectedItem: null");
         }
 
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
@@ -53,5 +56,6 @@ namespace HeatingSystemAdministration
             // else
             //MessageBox.Show("SelectedItem: null");
         }
+
     }
 }

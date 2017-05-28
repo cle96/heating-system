@@ -55,9 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Forms\CreateCustomerForm.xaml.cs">
+      <DependentUpon>CreateCustomerForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Meter.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Storage\DatabaseDummy.cs" />
+    <Page Include="Forms\CreateCustomerForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

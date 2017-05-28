@@ -12,3 +12,5 @@ c:\users\leahu cristian\documents\visual studio 2015\Projects\HeatingSystemAdmin
 c:\users\leahu cristian\documents\visual studio 2015\Projects\HeatingSystemAdministration\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.csproj.GenerateResource.Cache
 c:\users\leahu cristian\documents\visual studio 2015\Projects\HeatingSystemAdministration\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.exe
 c:\users\leahu cristian\documents\visual studio 2015\Projects\HeatingSystemAdministration\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.pdb
+c:\users\leahu cristian\documents\visual studio 2015\Projects\HeatingSystemAdministration\HeatingSystemAdministration\obj\Debug\Forms\CreateCustomerForm.g.cs
+c:\users\leahu cristian\documents\visual studio 2015\Projects\HeatingSystemAdministration\HeatingSystemAdministration\obj\Debug\Forms\CreateCustomerForm.baml

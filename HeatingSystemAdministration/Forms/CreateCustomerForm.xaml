@@ -1,0 +1,29 @@
+﻿<Window x:Class="HeatingSystemAdministration.Forms.CreateCustomerForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeatingSystemAdministration.Forms"
+        mc:Ignorable="d"
+        Title="CreateCustomerForm" Height="200" Width="300">
+    <Grid Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="223*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel >
+            <StackPanel Margin="5,5,5,5">
+                <Label Content="Customer name"></Label>
+                <TextBox x:Name="newCustomerName"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="5,5,5,10">
+                <Label Content="Customer address"></Label>
+                <TextBox x:Name="newCustomerAddress"></TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="5,20,5,10">
+                <Button x:Name="btnNewCustomerSave" Content="Save Customer" Height="22" Click="btnNewCustomerSave_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
