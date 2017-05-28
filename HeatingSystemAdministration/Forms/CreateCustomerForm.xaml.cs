@@ -32,13 +32,7 @@ namespace HeatingSystemAdministration.Forms
 
             Customer newCustomer = new Customer {UniqueNumber=number+1, Name = name, Address = address, Meters = new List<Model.Meter>() };
             Service.Service.AddCustomer(newCustomer);
-
             this.Close();
-            //Product product = (Product)lBoxProducts.SelectedItem;
-            // if (product != null)
-            //  MessageBox.Show("SelectedItem: type=" + product.GetType() + "\n" + product);
-            // else
-            //MessageBox.Show("SelectedItem: null");
         }
 
      

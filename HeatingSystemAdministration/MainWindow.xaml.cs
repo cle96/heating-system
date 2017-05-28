@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +21,15 @@ namespace HeatingSystemAdministration
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<Customer> customers = null;
+
         public MainWindow()
         {
             InitializeComponent();
+
             Service.Service.InitStorage();
-            //Storage.DatabaseDummy.GetCustomers().ForEach(c => Console.WriteLine(c.toString()));
-            //Storage.DatabaseDummy.GetMeters().ForEach(m => Console.WriteLine(m.toString()));
-            //Console.Read();
-            CustomersListBox.ItemsSource = Storage.DatabaseDummy.customers;
+            customers = new ObservableCollection<Customer>(Storage.DatabaseDummy.customers);
+            CustomersListBox.ItemsSource = customers;
             CustomersListBox.DisplayMemberPath = "Name";
         }
 
@@ -39,23 +41,21 @@ namespace HeatingSystemAdministration
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
             Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm();
+            cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
             cw.Show();
-            
-            //Product product = (Product)lBoxProducts.SelectedItem;
-            // if (product != null)
-            //  MessageBox.Show("SelectedItem: type=" + product.GetType() + "\n" + product);
-            // else
-            //MessageBox.Show("SelectedItem: null");
         }
 
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
         {
-            //Product product = (Product)lBoxProducts.SelectedItem;
-            // if (product != null)
-            //  MessageBox.Show("SelectedItem: type=" + product.GetType() + "\n" + product);
-            // else
-            //MessageBox.Show("SelectedItem: null");
+  
         }
 
+        private void RefreshList(object sender, EventArgs e)
+        {
+            //Storage.DatabaseDummy.customers.ForEach(c => Console.WriteLine(c));
+            customers = new ObservableCollection<Customer>(Storage.DatabaseDummy.customers);
+            CustomersListBox.ItemsSource = customers;
+        
+        }
     }
 }
