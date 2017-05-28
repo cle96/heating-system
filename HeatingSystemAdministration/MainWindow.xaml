@@ -1,0 +1,24 @@
+﻿<Window x:Class="HeatingSystemAdministration.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeatingSystemAdministration"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="223*"/>
+            <ColumnDefinition Width="295*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Name="CustomersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" SelectionChanged="CustomersListBox_SelectedIndexChanged"  Margin="5,5,0,10"  />
+        <StackPanel Grid.Column="1" Margin="5">
+            <ListBox Name="MetersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="269" Margin="5,5,0,5.4" Height="86" />
+            <Grid>
+                <Button x:Name="BtnCreateCustomer" Content="Create new Customer" Width="124" HorizontalAlignment="Left" Margin="5,5,0,5" Click="BtnCreateCustomer_Click"/>
+                <Button x:Name="BtnCreateMeter" Content="Create new Meter" Width="121" HorizontalAlignment="Right" Margin="0,5,10,5" Click="BtnCreateMeter_Click"/>
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+</Window>
