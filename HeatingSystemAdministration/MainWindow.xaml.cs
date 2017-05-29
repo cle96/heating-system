@@ -35,7 +35,9 @@ namespace HeatingSystemAdministration
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MetersListBox.ItemsSource = Storage.DatabaseDummy.meters.FindAll(m => m.Customer == CustomersListBox.SelectedItem);
+            List<Model.MeterReading> metersReadings = Storage.DatabaseDummy.metersReadings.FindAll(mr => mr.Meter.Customer == CustomersListBox.SelectedItem);
+            MetersListBox.ItemsSource = metersReadings;
+
         }
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)

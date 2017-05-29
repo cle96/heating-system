@@ -8,17 +8,28 @@ namespace HeatingSystemAdministration.Model
 {
     class Meter
     {
-        public string Number { get; set; }
-
-        public string Amount { get; set; }
+        public int Id { get; set; }
 
         public Customer Customer { get; set; }
 
-        public DateTime Year { get; set; }
+        public List<MeterReading> Readings { get; set; }
+
 
         public override string ToString()
         {
-            return this.Amount+ " for year: " + this.Year;
+            return Readings.ToString();
+        }
+
+        public List<MeterReading> AddMeterReading(MeterReading mr)
+        {
+            Readings.Add(mr);
+            return Readings;
+        }
+
+        public List<MeterReading> RemoveMeterReading(MeterReading mr)
+        {
+            Readings.Remove(mr);
+            return Readings;
         }
     }
 }

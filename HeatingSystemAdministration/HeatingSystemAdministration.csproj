@@ -61,6 +61,7 @@
       <DependentUpon>CreateCustomerForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Meter.cs" />
+    <Compile Include="Model\MeterReading.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Storage\DatabaseDummy.cs" />
     <Page Include="Forms\CreateCustomerForm.xaml">

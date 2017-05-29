@@ -8,7 +8,7 @@ namespace HeatingSystemAdministration
 {
     class Customer
     {
-        public int UniqueNumber { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -30,7 +30,7 @@ namespace HeatingSystemAdministration
 
         public override string ToString()
         {
-            return UniqueNumber + " " + Name + " " + Address;
+            return Id + " " + Name + " " + Address;
         }
 
     }
