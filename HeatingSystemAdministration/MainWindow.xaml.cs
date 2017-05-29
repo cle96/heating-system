@@ -90,7 +90,17 @@ namespace HeatingSystemAdministration
 
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
         {
-  
+            var customer = (Customer)CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                int id = db.Meters.Max(m => m.Id);
+                Meter newMeter = new Meter() { Id = id + 1, Customer = customer, MeterReadings = new List<MeterReading>() };
+                db.Meters.Add(newMeter);
+                db.SaveChanges();
+
+                MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
+            }
+
         }
 
         private void RefreshList(object sender, EventArgs e)

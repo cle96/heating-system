@@ -89,9 +89,6 @@
     <Compile Include="Forms\CreateCustomerForm.xaml.cs">
       <DependentUpon>CreateCustomerForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CreateMeterForm.xaml.cs">
-      <DependentUpon>CreateMeterForm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Meter.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -119,10 +116,6 @@
     <Compile Include="Storage\DatabaseDummy.cs" />
     <Compile Include="Storage\Storage.cs" />
     <Page Include="Forms\CreateCustomerForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\CreateMeterForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
