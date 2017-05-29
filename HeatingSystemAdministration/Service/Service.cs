@@ -32,7 +32,7 @@ namespace HeatingSystemAdministration.Service
 
             AddCustomer(c1); AddCustomer(c2); AddCustomer(c3); AddCustomer(c4);
             AddMeter(m1,c1); AddMeter(m01,c1); AddMeter(m2,c2); AddMeter(m3,c3); AddMeter(m4,c3);
-            AddMeterReading(mr01, m1); AddMeterReading(mr1, m1); AddMeterReading(mr2, m2); AddMeterReading(mr3, m3); AddMeterReading(mr4, m4);
+            AddMeterReading(mr01, m01); AddMeterReading(mr1, m1); AddMeterReading(mr2, m2); AddMeterReading(mr3, m3); AddMeterReading(mr4, m4);
         }
 
         public static List<Customer> AddCustomer(Customer customer)

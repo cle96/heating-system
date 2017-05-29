@@ -19,7 +19,7 @@ namespace HeatingSystemAdministration.Model
 
         public override string ToString()
         {
-            return this.kWh + "kWh " + this.CubicMeter + "m^3 " + UsageHours + " for year: " +Year;
+            return this.kWh + "kWh " + this.CubicMeter + "m^3 " + UsageHours + "hours for year: " +Year;
         }
     }
 }

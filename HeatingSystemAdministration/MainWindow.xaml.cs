@@ -29,15 +29,21 @@ namespace HeatingSystemAdministration
 
             Service.Service.InitStorage();
             customers = new ObservableCollection<Customer>(Storage.DatabaseDummy.customers);
+
             CustomersListBox.ItemsSource = customers;
             CustomersListBox.DisplayMemberPath = "Name";
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Model.MeterReading> metersReadings = Storage.DatabaseDummy.metersReadings.FindAll(mr => mr.Meter.Customer == CustomersListBox.SelectedItem);
-            MetersListBox.ItemsSource = metersReadings;
+            List<Model.Meter> meters = Storage.DatabaseDummy.meters.FindAll(m => m.Customer == CustomersListBox.SelectedItem);
+            MetersListBox.ItemsSource = meters;
+        }
 
+        private void MetersListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Model.MeterReading> metersReadings = Storage.DatabaseDummy.metersReadings.FindAll(mr => mr.Meter == MetersListBox.SelectedItem);
+            MetersReadingsListBox.ItemsSource = metersReadings;
         }
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
@@ -57,7 +63,7 @@ namespace HeatingSystemAdministration
             //Storage.DatabaseDummy.customers.ForEach(c => Console.WriteLine(c));
             customers = new ObservableCollection<Customer>(Storage.DatabaseDummy.customers);
             CustomersListBox.ItemsSource = customers;
-        
+
         }
     }
 }

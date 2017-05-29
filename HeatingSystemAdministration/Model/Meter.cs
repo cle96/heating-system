@@ -17,7 +17,7 @@ namespace HeatingSystemAdministration.Model
 
         public override string ToString()
         {
-            return Readings.ToString();
+            return Id.ToString();
         }
 
         public List<MeterReading> AddMeterReading(MeterReading mr)
