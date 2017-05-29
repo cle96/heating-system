@@ -35,3 +35,26 @@ C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\b
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.xml
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\HeatingSystemAdministration.exe.config
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.exe
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.pdb
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\HeatingSystemAdministration.exe
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\HeatingSystemAdministration.pdb
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.dll
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.xml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.csprojResolveAssemblyReference.cache
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\CreateCustomerForm.g.cs
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\MainWindow.g.cs
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\App.g.cs
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration_Content.g.cs
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration_MarkupCompile.cache
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration_MarkupCompile.lref
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\CreateCustomerForm.baml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\MainWindow.baml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.g.resources
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.Properties.Resources.resources
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.csproj.GenerateResource.Cache
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\CreateMeterForm.g.cs
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\CreateMeterForm.baml

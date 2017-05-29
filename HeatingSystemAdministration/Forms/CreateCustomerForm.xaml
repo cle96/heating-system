@@ -14,11 +14,11 @@
         <StackPanel >
             <StackPanel Margin="5,5,5,5">
                 <Label Content="Customer name"></Label>
-                <TextBox x:Name="newCustomerName"></TextBox>
+                <TextBox x:Name="newCustomerName" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
             </StackPanel>
             <StackPanel Margin="5,5,5,10">
                 <Label Content="Customer address"></Label>
-                <TextBox x:Name="newCustomerAddress"></TextBox>
+                <TextBox x:Name="newCustomerAddress" Text="{Binding Path=Address, Mode=TwoWay}"></TextBox>
             </StackPanel>
 
             <StackPanel Margin="5,20,5,10">

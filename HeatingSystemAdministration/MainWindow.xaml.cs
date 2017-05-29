@@ -62,9 +62,30 @@ namespace HeatingSystemAdministration
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
-            Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm();
+            Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(new Customer());
             cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
             cw.Show();
+        }
+
+
+        private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = (Customer) CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
+                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
+                cw.Show();
+            }
+        }
+
+        private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = (Customer)CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                CustomersListBox.ItemsSource = Service.Service.DeleteCustomer(customer.Id).OrderBy(c => c.Id).ToList(); 
+            }
         }
 
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
