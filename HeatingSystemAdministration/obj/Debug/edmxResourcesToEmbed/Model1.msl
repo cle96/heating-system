@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meters">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Meter)">
+        <MappingFragment StoreEntitySet="Meters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeterReadings">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.MeterReading)">
+        <MappingFragment StoreEntitySet="MeterReadings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="kWh" ColumnName="kWh" />
+          <ScalarProperty Name="CubeMeters" ColumnName="CubeMeters" />
+          <ScalarProperty Name="UsageHours" ColumnName="UsageHours" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CustomerMeter" TypeName="Model1.CustomerMeter" StoreEntitySet="Meters">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="Id" ColumnName="Customer_Id" />
+      </EndProperty>
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MeterMeterReading" TypeName="Model1.MeterMeterReading" StoreEntitySet="MeterReadings">
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="Id" ColumnName="Meter_Id" />
+      </EndProperty>
+      <EndProperty Name="MeterReading">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

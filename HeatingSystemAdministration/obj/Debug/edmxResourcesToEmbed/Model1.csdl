@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Model1.Customer" />
+    <EntitySet Name="Meters" EntityType="Model1.Meter" />
+    <EntitySet Name="MeterReadings" EntityType="Model1.MeterReading" />
+    <AssociationSet Name="CustomerMeter" Association="Model1.CustomerMeter">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Meter" EntitySet="Meters" />
+    </AssociationSet>
+    <AssociationSet Name="MeterMeterReading" Association="Model1.MeterMeterReading">
+      <End Role="Meter" EntitySet="Meters" />
+      <End Role="MeterReading" EntitySet="MeterReadings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Meters" Relationship="Model1.CustomerMeter" FromRole="Customer" ToRole="Meter" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Customer" Relationship="Model1.CustomerMeter" FromRole="Meter" ToRole="Customer" />
+    <NavigationProperty Name="MeterReadings" Relationship="Model1.MeterMeterReading" FromRole="Meter" ToRole="MeterReading" />
+  </EntityType>
+  <EntityType Name="MeterReading">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Meter" Relationship="Model1.MeterMeterReading" FromRole="MeterReading" ToRole="Meter" />
+    <Property Name="kWh" Type="Double" Nullable="false" />
+    <Property Name="CubeMeters" Type="Double" Nullable="false" />
+    <Property Name="UsageHours" Type="Double" Nullable="false" />
+    <Property Name="Year" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerMeter">
+    <End Type="Model1.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="Model1.Meter" Role="Meter" Multiplicity="*" />
+  </Association>
+  <Association Name="MeterMeterReading">
+    <End Type="Model1.Meter" Role="Meter" Multiplicity="1" />
+    <End Type="Model1.MeterReading" Role="MeterReading" Multiplicity="*" />
+  </Association>
+</Schema>

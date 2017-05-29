@@ -8,27 +8,27 @@
         Title="MainWindow" Height="350" Width="780">
     <Grid Name="grid1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="57*"/>
-            <ColumnDefinition Width="55*"/>
-            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="228*"/>
+            <ColumnDefinition Width="159*"/>
+            <ColumnDefinition Width="385*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="5">
-            <ListBox Name="CustomersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" SelectionChanged="CustomersListBox_SelectedIndexChanged"  Margin="5,5,0,10"  />
+            <ListBox Name="CustomersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" SelectionChanged="CustomersListBox_SelectedIndexChanged"  Margin="5,5,0,10" Height="100" />
             <Grid>
                 <Button x:Name="BtnCreateCustomer" Content="Create new Customer" Width="124" HorizontalAlignment="Left" Margin="41,0,0,10" Click="BtnCreateCustomer_Click"/>
             </Grid>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="5">
-            <ListBox Name="MetersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="195" SelectionChanged="MetersListBox_SelectedIndexChanged" Margin="5,5,0,5" Height="86" />
+            <ListBox Name="MetersListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="127" SelectionChanged="MetersListBox_SelectedIndexChanged" Margin="5,5,0,5" Height="100" />
             <Grid>
-                <Button x:Name="BtnCreateMeter" Content="Create new Meter" Width="121" HorizontalAlignment="Left" Margin="46,0,0,10" Click="BtnCreateMeter_Click"/>
+                <Button x:Name="BtnCreateMeter" Content="Create new Meter" Width="121" HorizontalAlignment="Left" Margin="10,5,0,5" Click="BtnCreateMeter_Click"/>
             </Grid>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="5">
-            <ListBox Name="MetersReadingsListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="299" Margin="5,5,0,5" Height="200" />
+            <ListBox Name="MetersReadingsListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="360" Margin="5,5,0,5" Height="200" />
         </StackPanel>
     </Grid>
 </Window>

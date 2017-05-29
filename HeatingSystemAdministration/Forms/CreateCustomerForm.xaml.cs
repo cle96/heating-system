@@ -30,7 +30,7 @@ namespace HeatingSystemAdministration.Forms
             String address = newCustomerAddress.Text;
             int number = Storage.DatabaseDummy.customers.Max(c => c.Id);
 
-            Customer newCustomer = new Customer { Id = number+1, Name = name, Address = address, Meters = new List<Model.Meter>() };
+            Customer newCustomer = new Customer { Id = number+1, Name = name, Address = address, Meters = new List<Meter>() };
             Service.Service.AddCustomer(newCustomer);
             this.Close();
         }

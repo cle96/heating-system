@@ -9,53 +9,103 @@ namespace HeatingSystemAdministration.Service
 {
     class Service
     {
-
+        
         public static void InitStorage()
         {
-            Customer c1 = new Customer() { Id = 1, Name="Cristian Leahu", Address="Fynsgade", Meters = new List<Model.Meter>() };
-            Model.Meter m01 = new Model.Meter() { Id = 1,  Customer = c1, Readings = new List<Model.MeterReading>() };
-            Model.MeterReading mr01 = new Model.MeterReading() { Id = 1, CubicMeter = 5.21, kWh = 553.2, UsageHours = 22, Year = new DateTime(2016, 1, 18) };
-            Model.Meter m1 = new Model.Meter() { Id =2, Customer = c1, Readings = new List<Model.MeterReading>() };
-            Model.MeterReading mr1 = new Model.MeterReading() { Id = 2, CubicMeter = 7.11, kWh = 451.2, UsageHours = 17, Year = new DateTime(2016, 1, 18) };
+            using (var db = new Storage.StorageContext())
+            {
+                //db.Set<Customer>();
+                //db.Set<Meter>();
+                //db.Set<MeterReading>();
+                db.Database.Delete();
 
-            Customer c2 = new Customer() { Id = 2, Name = "Benn", Address = "School", Meters = new List<Model.Meter>() };
-            Model.Meter m2 = new Model.Meter() { Id = 3, Customer = c2, Readings = new List<Model.MeterReading>() };
-            Model.MeterReading mr2 = new Model.MeterReading() { Id = 3, CubicMeter = 13.89, kWh = 221, UsageHours = 9, Year = new DateTime(2016, 1, 18) };
+                db.SaveChanges();
+            }
+          
+            Customer c1 = new Customer() { Id = 1, Name = "Cristian Leahu", Address = "Fynsgade", Meters= new List<Meter>()};
+            Customer c2 = new Customer() { Id = 2, Name = "Benn", Address = "School", Meters = new List<Meter>() }; 
+            Customer c3 = new Customer() { Id = 3, Name = "Donald Trump", Address = "White house", Meters = new List<Meter>() };
+            Customer c4 = new Customer() { Id = 4, Name = "Hilary Clinton", Address = "No house", Meters = new List<Meter>() };
 
-            Customer c3 = new Customer() { Id = 3, Name = "Donald Trump", Address = "White house", Meters = new List<Model.Meter>() };
-            Model.Meter m3 = new Model.Meter() { Id = 4, Customer = c3, Readings = new List<Model.MeterReading>() };
-            Model.MeterReading mr3 = new Model.MeterReading() { Id = 4, CubicMeter = 9.33, kWh = 114.5, UsageHours = 10, Year = new DateTime(2016, 1, 18) };
+            Meter m01 = new Meter() { Id = 1,  Customer = c1, MeterReadings = new List<MeterReading>() };
+            MeterReading mr01 = new MeterReading() { Id = 1, CubeMeters = 5.21, kWh = 553.2, UsageHours = 22, Year = new DateTime(2016, 1, 18), Meter=m01 };
 
-            Customer c4 = new Customer() { Id = 4, Name = "Hilary Clinton", Address = "No house", Meters = new List<Model.Meter>() };
-            Model.Meter m4 = new Model.Meter() { Id = 5, Customer = c4, Readings = new List<Model.MeterReading>() };
-            Model.MeterReading mr4 = new Model.MeterReading() { Id = 5, CubicMeter = 88.1, kWh = 1011.2, UsageHours = 12, Year = new DateTime(2016, 1, 18) };
+            Meter m1 = new Meter() { Id =2, Customer = c1, MeterReadings = new List<MeterReading>() };
+            MeterReading mr1 = new MeterReading() { Id = 2, CubeMeters = 73.21, kWh = 433.7, UsageHours = 17, Year = new DateTime(2017, 1, 18),Meter= m01 };
+         
+            Meter m2 = new Meter() { Id = 3, Customer = c2, MeterReadings = new List<MeterReading>() };
+            MeterReading mr2 = new MeterReading() { Id = 3, CubeMeters = 13.89, kWh = 221, UsageHours = 9, Year = new DateTime(2016, 1, 18), Meter = m2 };
+
+            Meter m3 = new Meter() { Id = 4, Customer = c3, MeterReadings = new List<MeterReading>() };
+            MeterReading mr3 = new MeterReading() { Id = 4, CubeMeters = 9.33, kWh = 114.5, UsageHours = 10, Year = new DateTime(2016, 1, 18), Meter = m3 };
+
+            Meter m4 = new Meter() { Id = 5, Customer = c4, MeterReadings = new List<MeterReading>() };
+            MeterReading mr4 = new MeterReading() { Id = 5, CubeMeters = 88.1, kWh = 1011.2, UsageHours = 12, Year = new DateTime(2016, 1, 18),Meter= m4 };
+            MeterReading mr42 = new MeterReading() { Id = 6, CubeMeters = 155.2, kWh = 2112.7, UsageHours = 42, Year = new DateTime(2017, 1, 18), Meter = m4 };
 
             AddCustomer(c1); AddCustomer(c2); AddCustomer(c3); AddCustomer(c4);
-            AddMeter(m1,c1); AddMeter(m01,c1); AddMeter(m2,c2); AddMeter(m3,c3); AddMeter(m4,c3);
-            AddMeterReading(mr01, m01); AddMeterReading(mr1, m1); AddMeterReading(mr2, m2); AddMeterReading(mr3, m3); AddMeterReading(mr4, m4);
+            AddMeter(m01,c1); AddMeter(m1,c1); AddMeter(m2,c2); AddMeter(m3,c3); AddMeter(m4,c4);
+            AddMeterReading(mr01,m01); AddMeterReading(mr1,m1); AddMeterReading(mr2,m2); AddMeterReading(mr3,m3); AddMeterReading(mr4,m4);AddMeterReading(mr42, m4);
+
         }
 
         public static List<Customer> AddCustomer(Customer customer)
         {
-            DatabaseDummy.customers.Add(customer);
-            return DatabaseDummy.GetCustomers();
+            using (var db = new Storage.StorageContext())
+            {
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                return db.Customers.ToList();
+            }
         }
 
-        public static List<Model.Meter> AddMeter(Model.Meter meter,Customer customer)
+        public static List<Meter> AddMeter(Meter meter,Customer customer)
         {
-            DatabaseDummy.meters.Add(meter);
-            customer.AddMeter(meter);
+            using (var db = new Storage.StorageContext())
+            {
+                db.Customers.Attach(meter.Customer);
+                db.Meters.Add(meter);
 
-            return DatabaseDummy.GetMeters();
+                db.SaveChanges();
+                return db.Meters.ToList();
+            }
         }
 
-        public static List<Model.MeterReading> AddMeterReading(Model.MeterReading meterReading, Model.Meter meter)
+        public static List<MeterReading> AddMeterReading(MeterReading meterReading, Meter meter)
         {
-            meter.AddMeterReading(meterReading);
-            meterReading.Meter = meter;
-            DatabaseDummy.metersReadings.Add(meterReading);
+            using (var db = new Storage.StorageContext())
+            {
+                //meterReading.Meter = meter;
+                db.Meters.Attach(meterReading.Meter);
+                db.MeterReadings.Add(meterReading);
+          
+                db.SaveChanges();
+                return db.MeterReadings.ToList();
+            }
+        }
 
-            return DatabaseDummy.GetMetersReadings();
+        public static List<Customer> GetCustomers()
+        {
+            using (var db = new Storage.StorageContext())
+            {
+                return db.Customers.ToList();
+            }
+        }
+
+        public static List<Meter> GetMeters()
+        {
+            using (var db = new Storage.StorageContext())
+            {
+                return db.Meters.ToList();
+            }
+        }
+
+        public static List<MeterReading> GetMeterReadings()
+        {
+            using (var db = new Storage.StorageContext())
+            {
+                return db.MeterReadings.ToList();
+            }
         }
     }
 }

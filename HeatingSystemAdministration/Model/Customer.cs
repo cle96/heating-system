@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeatingSystemAdministration
+namespace HeatingSystemAdministration.Model
 {
     class Customer
     {
@@ -14,15 +14,15 @@ namespace HeatingSystemAdministration
 
         public string Address { get; set; }
 
-        public List<Model.Meter> Meters { get; set; }
+        public List<Meter> Meters { get; set; }
 
-        public List<Model.Meter> AddMeter(Model.Meter meter)
+        public List<Meter> AddMeter(Meter meter)
         {
             Meters.Add(meter);
             return Meters;
         }
 
-        public List<Model.Meter> Remove(Model.Meter meter)
+        public List<Meter> Remove(Meter meter)
         {
             Meters.Remove(meter);
             return Meters;

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Customers" EntityType="Model1.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Meters" EntityType="Model1.Store.Meters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MeterReadings" EntityType="Model1.Store.MeterReadings" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerMeter" Association="Model1.Store.CustomerMeter">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Meter" EntitySet="Meters" />
+    </AssociationSet>
+    <AssociationSet Name="MeterMeterReading" Association="Model1.Store.MeterMeterReading">
+      <End Role="Meter" EntitySet="Meters" />
+      <End Role="MeterReading" EntitySet="MeterReadings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MeterReadings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kWh" Type="float" Nullable="false" />
+    <Property Name="CubeMeters" Type="float" Nullable="false" />
+    <Property Name="UsageHours" Type="float" Nullable="false" />
+    <Property Name="Year" Type="datetime" Nullable="false" />
+    <Property Name="Meter_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerMeter">
+    <End Role="Customer" Type="Model1.Store.Customers" Multiplicity="1" />
+    <End Role="Meter" Type="Model1.Store.Meters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Meter">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeterMeterReading">
+    <End Role="Meter" Type="Model1.Store.Meters" Multiplicity="1" />
+    <End Role="MeterReading" Type="Model1.Store.MeterReadings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeterReading">
+        <PropertyRef Name="Meter_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Model1.Customer" />
+          <EntitySet Name="Meters" EntityType="Model1.Meter" />
+          <EntitySet Name="MeterReadings" EntityType="Model1.MeterReading" />
+          <AssociationSet Name="CustomerMeter" Association="Model1.CustomerMeter">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Meter" EntitySet="Meters" />
+          </AssociationSet>
+          <AssociationSet Name="MeterMeterReading" Association="Model1.MeterMeterReading">
+            <End Role="Meter" EntitySet="Meters" />
+            <End Role="MeterReading" EntitySet="MeterReadings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Meters" Relationship="Model1.CustomerMeter" FromRole="Customer" ToRole="Meter" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="Model1.CustomerMeter" FromRole="Meter" ToRole="Customer" />
+          <NavigationProperty Name="MeterReadings" Relationship="Model1.MeterMeterReading" FromRole="Meter" ToRole="MeterReading" />
+        </EntityType>
+        <EntityType Name="MeterReading">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Meter" Relationship="Model1.MeterMeterReading" FromRole="MeterReading" ToRole="Meter" />
+          <Property Name="kWh" Type="Double" Nullable="false" />
+          <Property Name="CubeMeters" Type="Double" Nullable="false" />
+          <Property Name="UsageHours" Type="Double" Nullable="false" />
+          <Property Name="Year" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="CustomerMeter">
+          <End Type="Model1.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Model1.Meter" Role="Meter" Multiplicity="*" />
+        </Association>
+        <Association Name="MeterMeterReading">
+          <End Type="Model1.Meter" Role="Meter" Multiplicity="1" />
+          <End Type="Model1.MeterReading" Role="MeterReading" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meters">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Meter)">
+        <MappingFragment StoreEntitySet="Meters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeterReadings">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.MeterReading)">
+        <MappingFragment StoreEntitySet="MeterReadings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="kWh" ColumnName="kWh" />
+          <ScalarProperty Name="CubeMeters" ColumnName="CubeMeters" />
+          <ScalarProperty Name="UsageHours" ColumnName="UsageHours" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CustomerMeter" TypeName="Model1.CustomerMeter" StoreEntitySet="Meters">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="Id" ColumnName="Customer_Id" />
+      </EndProperty>
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MeterMeterReading" TypeName="Model1.MeterMeterReading" StoreEntitySet="MeterReadings">
+      <EndProperty Name="Meter">
+        <ScalarProperty Name="Id" ColumnName="Meter_Id" />
+      </EndProperty>
+      <EndProperty Name="MeterReading">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

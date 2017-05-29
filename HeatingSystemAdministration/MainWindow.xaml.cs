@@ -21,14 +21,18 @@ namespace HeatingSystemAdministration
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Customer> customers = null;
+        List<Customer> customers = null;
+        Storage.StorageContext db = new Storage.StorageContext();
 
         public MainWindow()
         {
             InitializeComponent();
 
             Service.Service.InitStorage();
-            customers = new ObservableCollection<Customer>(Storage.DatabaseDummy.customers);
+            //Service.Service.GetCustomers().ForEach(c => Console.WriteLine(c));
+            Console.WriteLine(db.Customers.Count());
+
+            customers = db.Customers.OrderBy(c => c.Id).ToList();
 
             CustomersListBox.ItemsSource = customers;
             CustomersListBox.DisplayMemberPath = "Name";
@@ -36,14 +40,24 @@ namespace HeatingSystemAdministration
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Model.Meter> meters = Storage.DatabaseDummy.meters.FindAll(m => m.Customer == CustomersListBox.SelectedItem);
-            MetersListBox.ItemsSource = meters;
+            var customer = (Customer) CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                List<Meter> meters = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
+
+                MetersListBox.ItemsSource = meters;
+                MetersListBox.DisplayMemberPath = "Id";
+            }
         }
 
         private void MetersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Model.MeterReading> metersReadings = Storage.DatabaseDummy.metersReadings.FindAll(mr => mr.Meter == MetersListBox.SelectedItem);
-            MetersReadingsListBox.ItemsSource = metersReadings;
+            var meter = (Meter) MetersListBox.SelectedItem;
+            if (meter != null)
+            {
+                List<MeterReading> metersReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
+                MetersReadingsListBox.ItemsSource = metersReadings;
+            }
         }
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
@@ -61,7 +75,7 @@ namespace HeatingSystemAdministration
         private void RefreshList(object sender, EventArgs e)
         {
             //Storage.DatabaseDummy.customers.ForEach(c => Console.WriteLine(c));
-            customers = new ObservableCollection<Customer>(Storage.DatabaseDummy.customers);
+            customers = db.Customers.OrderBy(c => c.Id).ToList();
             CustomersListBox.ItemsSource = customers;
 
         }

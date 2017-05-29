@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Customers" EntityType="Model1.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Meters" EntityType="Model1.Store.Meters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MeterReadings" EntityType="Model1.Store.MeterReadings" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerMeter" Association="Model1.Store.CustomerMeter">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Meter" EntitySet="Meters" />
+    </AssociationSet>
+    <AssociationSet Name="MeterMeterReading" Association="Model1.Store.MeterMeterReading">
+      <End Role="Meter" EntitySet="Meters" />
+      <End Role="MeterReading" EntitySet="MeterReadings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MeterReadings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kWh" Type="float" Nullable="false" />
+    <Property Name="CubeMeters" Type="float" Nullable="false" />
+    <Property Name="UsageHours" Type="float" Nullable="false" />
+    <Property Name="Year" Type="datetime" Nullable="false" />
+    <Property Name="Meter_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerMeter">
+    <End Role="Customer" Type="Model1.Store.Customers" Multiplicity="1" />
+    <End Role="Meter" Type="Model1.Store.Meters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Meter">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MeterMeterReading">
+    <End Role="Meter" Type="Model1.Store.Meters" Multiplicity="1" />
+    <End Role="MeterReading" Type="Model1.Store.MeterReadings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeterReading">
+        <PropertyRef Name="Meter_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
