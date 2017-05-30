@@ -52,18 +52,13 @@ namespace HeatingSystemAdministration
 
         private void MetersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var meter = (Meter) MetersListBox.SelectedItem;
-            if (meter != null)
-            {
-                List<MeterReading> metersReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
-                MetersReadingsListBox.ItemsSource = metersReadings;
-            }
+            RefreshMeterReadingsList();
         }
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
             Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(new Customer());
-            cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
+            cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerList);
             cw.Show();
         }
 
@@ -74,7 +69,7 @@ namespace HeatingSystemAdministration
             if (customer != null)
             {
                 Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
-                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
+                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerList);
                 cw.Show();
             }
         }
@@ -103,12 +98,51 @@ namespace HeatingSystemAdministration
 
         }
 
-        private void RefreshList(object sender, EventArgs e)
+        private void BtnEnableReadings_Click(object sender, RoutedEventArgs e)
+        {
+            var yearFromTextBox = YearForEnabling.Text;
+            try
+            {
+                if (yearFromTextBox != null)
+                {
+                    int year = Convert.ToInt32(yearFromTextBox);
+                    DateTime newYearDate = new DateTime(year, 1, 1);
+                    List<Meter> metersToBeEnabled = db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year < year).Count() > 0).ToList();
+                    int id = db.MeterReadings.Max(m => m.Id);
+                    metersToBeEnabled.ForEach(m =>
+                    {
+                        MeterReading newMeterReading = new MeterReading() { Id = id++, CubeMeters = 0, kWh = 0, Meter = m, UsageHours = 0, Year = newYearDate };
+                        db.MeterReadings.Add(newMeterReading);
+                        db.SaveChanges();
+                    });
+                    metersToBeEnabled.ForEach(m => Console.WriteLine(m.ToString()));
+
+                    RefreshMeterReadingsList();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
+            }
+
+        }
+
+        private void RefreshCustomerList(object sender, EventArgs e)
         {
             //Storage.DatabaseDummy.customers.ForEach(c => Console.WriteLine(c));
             customers = db.Customers.OrderBy(c => c.Id).ToList();
             CustomersListBox.ItemsSource = customers;
 
+        }
+
+        private void RefreshMeterReadingsList()
+        {
+            var meter = (Meter)MetersListBox.SelectedItem;
+            if (meter != null)
+            {
+                List<MeterReading> metersReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
+                MetersReadingsListBox.ItemsSource = metersReadings;
+            }
         }
     }
 }

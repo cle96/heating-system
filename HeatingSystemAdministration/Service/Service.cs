@@ -33,7 +33,7 @@ namespace HeatingSystemAdministration.Service
             MeterReading mr01 = new MeterReading() { Id = 1, CubeMeters = 5.21, kWh = 553.2, UsageHours = 22, Year = new DateTime(2016, 1, 18), Meter=m01 };
 
             Meter m1 = new Meter() { Id =2, Customer = c1, MeterReadings = new List<MeterReading>() };
-            MeterReading mr1 = new MeterReading() { Id = 2, CubeMeters = 73.21, kWh = 433.7, UsageHours = 17, Year = new DateTime(2017, 1, 18),Meter= m01 };
+            MeterReading mr1 = new MeterReading() { Id = 2, CubeMeters = 73.21, kWh = 433.7, UsageHours = 17, Year = new DateTime(2017, 1, 18),Meter= m1 };
          
             Meter m2 = new Meter() { Id = 3, Customer = c2, MeterReadings = new List<MeterReading>() };
             MeterReading mr2 = new MeterReading() { Id = 3, CubeMeters = 13.89, kWh = 221, UsageHours = 9, Year = new DateTime(2016, 1, 18), Meter = m2 };
