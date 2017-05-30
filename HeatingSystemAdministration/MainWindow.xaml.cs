@@ -27,14 +27,8 @@ namespace HeatingSystemAdministration
         public MainWindow()
         {
             InitializeComponent();
-
             Service.Service.InitStorage();
-            //Service.Service.GetCustomers().ForEach(c => Console.WriteLine(c));
-            Console.WriteLine(db.Customers.Count());
-
-            customers = db.Customers.OrderBy(c => c.Id).ToList();
-
-            CustomersListBox.ItemsSource = customers;
+            RefreshCustomerList();
             CustomersListBox.DisplayMemberPath = "Name";
         }
 
@@ -91,9 +85,7 @@ namespace HeatingSystemAdministration
                 int id = db.Meters.Max(m => m.Id);
                 customer = db.Customers.Where(c => c.Id == customer.Id).First();
                 Meter newMeter = new Meter() { Id = id + 1, Customer = customer, MeterReadings = new List<MeterReading>() };
-                
                 db.Meters.Add(newMeter);
-
                 db.SaveChanges();
 
                 MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
@@ -127,6 +119,24 @@ namespace HeatingSystemAdministration
                 MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
             }
 
+        }
+
+        private void BtnDisplayStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            var yearFromTextBox = YearForEnabling.Text;
+            //try
+          //  {
+                if (yearFromTextBox != null)
+                {
+                    int year = Convert.ToInt32(yearFromTextBox);
+                    Forms.Statistics statistics = new Forms.Statistics(year);
+                    statistics.Show();
+                }
+          //  }
+           // catch
+          //  {
+              //  MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
+            //}
         }
 
         private void RefreshCustomerListEvent(object sender, EventArgs e)
