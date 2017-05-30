@@ -30,6 +30,7 @@ namespace HeatingSystemAdministration
             Service.Service.InitStorage();
             RefreshCustomerList();
             CustomersListBox.DisplayMemberPath = "Name";
+            MetersListBox.DisplayMemberPath = "Id";
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,10 +38,7 @@ namespace HeatingSystemAdministration
             var customer = (Customer) CustomersListBox.SelectedItem;
             if (customer != null)
             {
-                List<Meter> meters = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
-
-                MetersListBox.ItemsSource = meters;
-                MetersListBox.DisplayMemberPath = "Id";
+                RefreshMetersList(customer.Id);
             }
         }
 
@@ -73,7 +71,8 @@ namespace HeatingSystemAdministration
             var customer = (Customer)CustomersListBox.SelectedItem;
             if (customer != null)
             {
-                CustomersListBox.ItemsSource = Service.Service.DeleteCustomer(customer.Id).OrderBy(c => c.Id).ToList(); 
+                Service.Service.DeleteCustomer(customer.Id);
+                RefreshCustomerList(); RefreshMetersList(customer.Id);
             }
         }
 
@@ -82,13 +81,8 @@ namespace HeatingSystemAdministration
             var customer = (Customer) CustomersListBox.SelectedItem;
             if (customer != null)
             {
-                int id = db.Meters.Max(m => m.Id);
-                customer = db.Customers.Where(c => c.Id == customer.Id).First();
-                Meter newMeter = new Meter() { Id = id + 1, Customer = customer, MeterReadings = new List<MeterReading>() };
-                db.Meters.Add(newMeter);
-                db.SaveChanges();
-
-                MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
+                Service.Service.CreateMeter(customer.Id);
+                RefreshMetersList(customer.Id);
             }
 
         }
@@ -102,13 +96,9 @@ namespace HeatingSystemAdministration
                 {
                     int year = Convert.ToInt32(yearFromTextBox);
                     DateTime newYearDate = new DateTime(year, 1, 1);
-                    List<Meter> metersToBeEnabled = db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year == year).Count() == 0).ToList();
-                    int id = db.MeterReadings.Max(m => m.Id);
-                    metersToBeEnabled.ForEach(m =>
+                    db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year == year).Count() == 0).ToList().ForEach(m =>
                     {
-                        MeterReading newMeterReading = new MeterReading() { Id = id++, CubeMeters = 0, kWh = 0, Meter = m, UsageHours = 0, Year = newYearDate };
-                        db.MeterReadings.Add(newMeterReading);
-                        db.SaveChanges();
+                        Service.Service.CreateMeterReading(m.Id,newYearDate);
                     });
 
                     RefreshMeterReadingsList();
@@ -116,7 +106,7 @@ namespace HeatingSystemAdministration
             }
             catch
             {
-                MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
+                MessageBox.Show("The field must contain a valid year!", "Error while saving", MessageBoxButton.OK);
             }
 
         }
@@ -126,19 +116,17 @@ namespace HeatingSystemAdministration
             var yearFromTextBox = YearForEnabling.Text;
             try
             {
-                if (yearFromTextBox != null)
-                {
                     int year = Convert.ToInt32(yearFromTextBox);
                     Forms.Statistics statistics = new Forms.Statistics(year);
                     statistics.ShowDialog();
-                }
             }
             catch
             {
-               MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
+               MessageBox.Show("The field must contain a valid year!", "Error while saving", MessageBoxButton.OK);
             }
         }
 
+        //-----------------------------------List refreshers----------------------------
         private void RefreshCustomerListEvent(object sender, EventArgs e)
         {
             RefreshCustomerList();
@@ -150,13 +138,17 @@ namespace HeatingSystemAdministration
             CustomersListBox.ItemsSource = customers;
         }
 
+        private void RefreshMetersList(int customerId)
+        {
+            MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customerId).ToList();
+        }
+
         private void RefreshMeterReadingsList()
         {
             var meter = (Meter)MetersListBox.SelectedItem;
             if (meter != null)
             {
-                List<MeterReading> metersReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
-                MetersReadingsListBox.ItemsSource = metersReadings;
+                MetersReadingsListBox.ItemsSource = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
             }
         }
     }

@@ -78,6 +78,34 @@ namespace HeatingSystemAdministration.Service
                 return db.Customers.ToList();
             }
         }
+        public static List<Meter> CreateMeter(int customerId)
+        {
+            using (var db = new Storage.StorageContext())
+            {
+                int id = db.Meters.Max(m => m.Id);
+                var customer = db.Customers.Where(c => c.Id == customerId).First();
+                Meter newMeter = new Meter() { Id = id + 1, Customer = customer, MeterReadings = new List<MeterReading>() };
+                db.Meters.Add(newMeter);
+
+                db.SaveChanges();
+                return db.Meters.ToList();
+            }
+        }
+
+        public static List<MeterReading> CreateMeterReading(int meterId,DateTime newYearDate)
+        {
+            using (var db = new Storage.StorageContext())
+            {
+                int id = db.MeterReadings.Max(mr => mr.Id);
+                Meter meter = db.Meters.Where(m => m.Id == meterId).First();
+
+                MeterReading newMeterReading = new MeterReading() { Id = id+1, CubeMeters = 0, kWh = 0, Meter = meter, UsageHours = 0, Year = newYearDate };
+                db.MeterReadings.Add(newMeterReading);
+                db.SaveChanges();
+
+                return db.MeterReadings.ToList();
+            }
+        }
 
         public static List<Meter> AddMeter(Meter meter)
         {
