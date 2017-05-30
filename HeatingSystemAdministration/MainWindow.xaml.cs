@@ -58,7 +58,7 @@ namespace HeatingSystemAdministration
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
             Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(new Customer());
-            cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerList);
+            cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerListEvent);
             cw.Show();
         }
 
@@ -69,7 +69,7 @@ namespace HeatingSystemAdministration
             if (customer != null)
             {
                 Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
-                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerList);
+                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerListEvent);
                 cw.Show();
             }
         }
@@ -85,12 +85,15 @@ namespace HeatingSystemAdministration
 
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
         {
-            var customer = (Customer)CustomersListBox.SelectedItem;
+            var customer = (Customer) CustomersListBox.SelectedItem;
             if (customer != null)
             {
                 int id = db.Meters.Max(m => m.Id);
+                customer = db.Customers.Where(c => c.Id == customer.Id).First();
                 Meter newMeter = new Meter() { Id = id + 1, Customer = customer, MeterReadings = new List<MeterReading>() };
+                
                 db.Meters.Add(newMeter);
+
                 db.SaveChanges();
 
                 MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
@@ -107,7 +110,7 @@ namespace HeatingSystemAdministration
                 {
                     int year = Convert.ToInt32(yearFromTextBox);
                     DateTime newYearDate = new DateTime(year, 1, 1);
-                    List<Meter> metersToBeEnabled = db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year < year).Count() > 0).ToList();
+                    List<Meter> metersToBeEnabled = db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year == year).Count() == 0).ToList();
                     int id = db.MeterReadings.Max(m => m.Id);
                     metersToBeEnabled.ForEach(m =>
                     {
@@ -115,7 +118,6 @@ namespace HeatingSystemAdministration
                         db.MeterReadings.Add(newMeterReading);
                         db.SaveChanges();
                     });
-                    metersToBeEnabled.ForEach(m => Console.WriteLine(m.ToString()));
 
                     RefreshMeterReadingsList();
                 }
@@ -127,12 +129,15 @@ namespace HeatingSystemAdministration
 
         }
 
-        private void RefreshCustomerList(object sender, EventArgs e)
+        private void RefreshCustomerListEvent(object sender, EventArgs e)
         {
-            //Storage.DatabaseDummy.customers.ForEach(c => Console.WriteLine(c));
+            RefreshCustomerList();
+        }
+
+        private void RefreshCustomerList()
+        {
             customers = db.Customers.OrderBy(c => c.Id).ToList();
             CustomersListBox.ItemsSource = customers;
-
         }
 
         private void RefreshMeterReadingsList()

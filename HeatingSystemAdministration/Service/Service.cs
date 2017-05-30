@@ -46,8 +46,8 @@ namespace HeatingSystemAdministration.Service
             MeterReading mr42 = new MeterReading() { Id = 6, CubeMeters = 155.2, kWh = 2112.7, UsageHours = 42, Year = new DateTime(2017, 1, 18), Meter = m4 };
 
             AddCustomer(c1); AddCustomer(c2); AddCustomer(c3); AddCustomer(c4);
-            AddMeter(m01,c1); AddMeter(m1,c1); AddMeter(m2,c2); AddMeter(m3,c3); AddMeter(m4,c4);
-            AddMeterReading(mr01,m01); AddMeterReading(mr1,m1); AddMeterReading(mr2,m2); AddMeterReading(mr3,m3); AddMeterReading(mr4,m4);AddMeterReading(mr42, m4);
+            AddMeter(m01); AddMeter(m1); AddMeter(m2); AddMeter(m3); AddMeter(m4);
+            AddMeterReading(mr01); AddMeterReading(mr1); AddMeterReading(mr2); AddMeterReading(mr3); AddMeterReading(mr4);AddMeterReading(mr42);
 
         }
 
@@ -65,7 +65,7 @@ namespace HeatingSystemAdministration.Service
         {
             using (var db = new Storage.StorageContext())
             {
-                Customer customer = db.Customers.FirstOrDefault(c => c.Id == customerId);
+                Customer customer = db.Customers.Where(c => c.Id == customerId).First();
                 customer.Meters.ToList().ForEach(m =>{
                     m.MeterReadings.ToList().ForEach(mr =>{
                         db.MeterReadings.Remove(mr);
@@ -79,7 +79,7 @@ namespace HeatingSystemAdministration.Service
             }
         }
 
-        public static List<Meter> AddMeter(Meter meter,Customer customer)
+        public static List<Meter> AddMeter(Meter meter)
         {
             using (var db = new Storage.StorageContext())
             {
@@ -91,7 +91,7 @@ namespace HeatingSystemAdministration.Service
             }
         }
 
-        public static List<MeterReading> AddMeterReading(MeterReading meterReading, Meter meter)
+        public static List<MeterReading> AddMeterReading(MeterReading meterReading)
         {
             using (var db = new Storage.StorageContext())
             {
