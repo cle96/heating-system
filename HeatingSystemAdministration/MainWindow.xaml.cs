@@ -53,7 +53,7 @@ namespace HeatingSystemAdministration
         {
             Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(new Customer());
             cw.Closed += new EventHandler(RefreshCustomerListEvent);
-            cw.Show();
+            cw.ShowDialog();
         }
 
 
@@ -64,7 +64,7 @@ namespace HeatingSystemAdministration
             {
                 Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
                 cw.Closed += new EventHandler(RefreshCustomerListEvent);
-                cw.Show();
+                cw.ShowDialog();
             }
         }
 
@@ -124,19 +124,19 @@ namespace HeatingSystemAdministration
         private void BtnDisplayStatistics_Click(object sender, RoutedEventArgs e)
         {
             var yearFromTextBox = YearForEnabling.Text;
-            //try
-          //  {
+            try
+            {
                 if (yearFromTextBox != null)
                 {
                     int year = Convert.ToInt32(yearFromTextBox);
                     Forms.Statistics statistics = new Forms.Statistics(year);
-                    statistics.Show();
+                    statistics.ShowDialog();
                 }
-          //  }
-           // catch
-          //  {
-              //  MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
-            //}
+            }
+            catch
+            {
+               MessageBox.Show("The field must contain only the year", "Error while saving", MessageBoxButton.OK);
+            }
         }
 
         private void RefreshCustomerListEvent(object sender, EventArgs e)

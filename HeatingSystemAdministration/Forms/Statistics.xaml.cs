@@ -45,9 +45,9 @@ namespace HeatingSystemAdministration.Forms
         {
             var coolingSufficientMetersCount = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year && !mr.CoolingIsSufficient()).Select(mr=> mr.Id).Distinct().ToList().Count();
             var allMetersCount = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year).Select(mr => mr.Id).Distinct().ToList().Count();
-            var percentage = coolingSufficientMetersCount == 0?0:(allMetersCount / coolingSufficientMetersCount) * 100;
+            var percentage = coolingSufficientMetersCount == 0?0:(coolingSufficientMetersCount / allMetersCount) * 100;
 
-            lblPercentage.Content = percentage + "% don't have minimum cooling";
+            lblPercentage.Content = percentage + "% have insufficient cooling ";
         }
     }
 }
