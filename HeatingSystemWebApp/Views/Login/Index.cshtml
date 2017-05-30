@@ -1,0 +1,22 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div>
+                <label>Add meter number</label>
+                <input />
+                <div style="color:red">@ViewBag.ErrorMessage</div>
+                <input type="submit" value="Login" />
+            </div>
+        }
+    </div>
+</body>
+</html>
