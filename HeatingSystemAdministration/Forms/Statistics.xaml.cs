@@ -43,7 +43,6 @@ namespace HeatingSystemAdministration.Forms
 
         public void setPercentageForCooling(int year)
         {
-
             var coolingSufficientMetersCount = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year && !mr.CoolingIsSufficient()).Select(mr=> mr.Id).Distinct().ToList().Count();
             var allMetersCount = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year).Select(mr => mr.Id).Distinct().ToList().Count();
             var percentage = coolingSufficientMetersCount == 0?0:(allMetersCount / coolingSufficientMetersCount) * 100;

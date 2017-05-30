@@ -52,7 +52,7 @@ namespace HeatingSystemAdministration
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
             Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(new Customer());
-            cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerListEvent);
+            cw.Closed += new EventHandler(RefreshCustomerListEvent);
             cw.Show();
         }
 
@@ -63,7 +63,7 @@ namespace HeatingSystemAdministration
             if (customer != null)
             {
                 Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
-                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshCustomerListEvent);
+                cw.Closed += new EventHandler(RefreshCustomerListEvent);
                 cw.Show();
             }
         }
