@@ -3,26 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HeatingSystemAdministration.Storage;
+using HeatingSystemWebApp.Models;
 using HeatingSystemAdministration;
 
 namespace HeatingSystemWebApp.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
 
+        // GET: Login
         public ActionResult Index(int? id = null)
         {
+            LoginViewModel model = new LoginViewModel();
 
-            using (var db = new Storage.StorageContext())
+            using (var db = new StorageContext())
             {
-                if (id != null)
-                {
-                    model.Customer = db.Customers.Find(id);
+                    if (id != null)
+                    {
+                        model.Meter = db.Meters.Find(id);
+                    }
                 }
-                model.Matches = db.Matches.Where(m => m.MatchStart >= DateTime.Now).ToList();
+                return View(model);
             }
-            return View(model);
+
+        [HttpPost]
+        public ActionResult Login(Meter meter)
+        {
+            Meter login;
+            using (var db = new StorageContext())
+            {
+                login = db.Meters.Find(meter.Id);
+            }
+
+            if (login == null)
+            {
+                ViewBag.ErrorMessage = "User Not Found";
+                return View();
+            }
+            return this.RedirectToAction("Index", new { id = login.Id });
         }
     }
 }

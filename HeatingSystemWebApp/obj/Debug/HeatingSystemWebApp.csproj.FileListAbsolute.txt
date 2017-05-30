@@ -44,3 +44,9 @@ C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin
 C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\obj\Debug\HeatingSystemWebApp.csprojResolveAssemblyReference.cache
 C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\obj\Debug\HeatingSystemWebApp.dll
 C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\obj\Debug\HeatingSystemWebApp.pdb
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\EntityFramework.dll
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\EntityFramework.SqlServer.dll
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\HeatingSystemAdministration.exe
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\HeatingSystemAdministration.pdb
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\EntityFramework.xml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\EntityFramework.SqlServer.xml
