@@ -62,14 +62,45 @@ namespace HeatingSystemAdministration
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
-            Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm();
+            Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(new Customer());
             cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
             cw.Show();
         }
 
+
+        private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = (Customer) CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
+                cw.Closing += new System.ComponentModel.CancelEventHandler(RefreshList);
+                cw.Show();
+            }
+        }
+
+        private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = (Customer)CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                CustomersListBox.ItemsSource = Service.Service.DeleteCustomer(customer.Id).OrderBy(c => c.Id).ToList(); 
+            }
+        }
+
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
         {
-  
+            var customer = (Customer)CustomersListBox.SelectedItem;
+            if (customer != null)
+            {
+                int id = db.Meters.Max(m => m.Id);
+                Meter newMeter = new Meter() { Id = id + 1, Customer = customer, MeterReadings = new List<MeterReading>() };
+                db.Meters.Add(newMeter);
+                db.SaveChanges();
+
+                MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customer.Id).ToList();
+            }
+
         }
 
         private void RefreshList(object sender, EventArgs e)

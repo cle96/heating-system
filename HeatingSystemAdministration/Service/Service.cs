@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HeatingSystemAdministration.Storage;
+using System.Data.Entity;
 
 namespace HeatingSystemAdministration.Service
 {
@@ -14,10 +15,11 @@ namespace HeatingSystemAdministration.Service
         {
             using (var db = new Storage.StorageContext())
             {
-                //db.Set<Customer>();
-                //db.Set<Meter>();
-                //db.Set<MeterReading>();
+                
                 db.Database.Delete();
+                db.Set<Customer>();
+                db.Set<Meter>();
+                db.Set<MeterReading>();
 
                 db.SaveChanges();
             }
@@ -55,6 +57,24 @@ namespace HeatingSystemAdministration.Service
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
+                return db.Customers.ToList();
+            }
+        }
+
+        public static List<Customer> DeleteCustomer(int customerId)
+        {
+            using (var db = new Storage.StorageContext())
+            {
+                Customer customer = db.Customers.FirstOrDefault(c => c.Id == customerId);
+                customer.Meters.ToList().ForEach(m =>{
+                    m.MeterReadings.ToList().ForEach(mr =>{
+                        db.MeterReadings.Remove(mr);
+                    });
+                    db.Meters.Remove(m);
+                });
+                db.Customers.Remove(customer);
+                db.SaveChanges();
+
                 return db.Customers.ToList();
             }
         }

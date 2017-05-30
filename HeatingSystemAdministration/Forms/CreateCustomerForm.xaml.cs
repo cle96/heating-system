@@ -19,22 +19,36 @@ namespace HeatingSystemAdministration.Forms
     /// </summary>
     public partial class CreateCustomerForm : Window
     {
-        public CreateCustomerForm()
+        Storage.StorageContext db = new Storage.StorageContext();
+
+        public CreateCustomerForm(Customer customer)
         {
             InitializeComponent();
+            this.DataContext = customer;
         }
 
         private void btnNewCustomerSave_Click(object sender, RoutedEventArgs e)
         {
-            String name = newCustomerName.Text;
-            String address = newCustomerAddress.Text;
-            int number = Storage.DatabaseDummy.customers.Max(c => c.Id);
+            Customer customer = this.DataContext as Customer;
+            Console.WriteLine(customer.Id);
 
-            Customer newCustomer = new Customer { Id = number+1, Name = name, Address = address, Meters = new List<Meter>() };
-            Service.Service.AddCustomer(newCustomer);
-            this.Close();
+            if (customer.Name == "" || customer.Address == "")
+                MessageBox.Show("Name or address can't be null", "Error while saving", MessageBoxButton.OK);
+            else
+            {
+                if (customer.Id == 0)
+                    createNewCustomer(customer);
+
+                this.Close();
+            }
         }
 
+        private void createNewCustomer(Customer c)
+        {
+            int number = db.Customers.Max(customer => customer.Id);
+            Customer newCustomer = new Customer { Id = number + 1, Name = c.Name, Address = c.Address, Meters = new List<Meter>() };
+            Service.Service.AddCustomer(newCustomer);
+        }
      
     }
 }
