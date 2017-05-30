@@ -58,3 +58,5 @@ C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministra
 C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.csproj.GenerateResource.Cache
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.g.cs
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.baml
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.g.cs
+C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.baml
