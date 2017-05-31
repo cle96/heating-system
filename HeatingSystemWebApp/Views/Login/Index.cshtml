@@ -8,15 +8,13 @@
 </head>
 <body>
     <div>
-        @using (Html.BeginForm())
-        {
-            <div>
+      @using (Html.BeginForm())
+      {
                 @Html.Label("Meter id")
-                @Html.TextBox("id")
-                
-                <input type="submit" value="Login" />
-            </div>
-        }
+                @Html.TextBox("Id")
+
+              <input type="submit" name="submit" value="Submit" />
+      }
     </div>
 </body>
 </html>

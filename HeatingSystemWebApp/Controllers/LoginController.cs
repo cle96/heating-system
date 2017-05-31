@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
-using HeatingSystemWebApp.Models;
+using System.Linq;
 
 namespace HeatingSystemWebApp.Controllers
 {
@@ -13,34 +10,26 @@ namespace HeatingSystemWebApp.Controllers
     {
 
         // GET: Login
-        public ActionResult Index(int? id = null)
+        public ActionResult Index()
         {
-            LoginViewModel model = new LoginViewModel();
+            return View(new Meter());
+        }
 
-            using (var db = new StorageContext())
-            {
-                    if (id != null)
-                    {
-                        model.Meter = db.Meters.Find(id);
-                    }
-                }
-                return View(model.Meter);
-            }
-
-        [HttpPost]
-        public ActionResult Login(Meter meter)
+       [HttpPost]
+        public ActionResult Index(Meter m)
         {
             Meter login;
             using (var db = new StorageContext())
             {
-                login = db.Meters.Find(meter.Id);
+                login = db.Meters.Where(meter => meter.Id == m.Id).First();
             }
 
             if (login == null)
             {
                 ViewBag.ErrorMessage = "User Not Found";
+                return View(new Meter());
             }
-            return this.RedirectToAction("MeterReadingsController", new { id = login.Id });
+            return RedirectToAction("Index", "MeterReadings", new { meterId = m.Id },);
         }
     }
 }
