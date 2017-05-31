@@ -67,6 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Migrations\201705310836579_InitialCreate.cs" />
+    <Compile Include="Migrations\201705310836579_InitialCreate.Designer.cs">
+      <DependentUpon>201705310836579_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Meter.cs" />
     <Compile Include="Model\MeterReading.cs" />
@@ -102,7 +107,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705310836579_InitialCreate.resx">
+      <DependentUpon>201705310836579_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

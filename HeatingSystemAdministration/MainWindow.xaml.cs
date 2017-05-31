@@ -30,7 +30,7 @@ namespace HeatingSystemAdministration
         public MainWindow()
         {
             InitializeComponent();
-            Service.Service.InitStorage();
+            //Service.Service.InitStorage();
             RefreshCustomerList();
             CustomersListBox.DisplayMemberPath = "Name";
             MetersListBox.DisplayMemberPath = "Id";
@@ -137,13 +137,19 @@ namespace HeatingSystemAdministration
 
         private void RefreshCustomerList()
         {
-            customers = db.Customers.OrderBy(c => c.Id).ToList();
-            CustomersListBox.ItemsSource = customers;
+            using (var db = new StorageContext())
+            {
+                customers = db.Customers.OrderBy(c => c.Id).ToList();
+                CustomersListBox.ItemsSource = customers;
+            }
         }
 
         private void RefreshMetersList(int customerId)
         {
-            MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customerId).ToList();
+            using (var db = new StorageContext())
+            {
+                MetersListBox.ItemsSource = db.Meters.Where(m => m.Customer.Id == customerId).ToList();
+            }
         }
 
         private void RefreshMeterReadingsList()
@@ -151,7 +157,10 @@ namespace HeatingSystemAdministration
             var meter = (Meter)MetersListBox.SelectedItem;
             if (meter != null)
             {
-                MetersReadingsListBox.ItemsSource = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
+                using (var db = new StorageContext())
+                {
+                    MetersReadingsListBox.ItemsSource = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
+                }
             }
         }
     }
