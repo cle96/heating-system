@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
 using HeatingSystemWebApp.Models;
-using HeatingSystemAdministration;
 
 namespace HeatingSystemWebApp.Controllers
 {
@@ -25,7 +24,7 @@ namespace HeatingSystemWebApp.Controllers
                         model.Meter = db.Meters.Find(id);
                     }
                 }
-                return View(model);
+                return View(model.Meter);
             }
 
         [HttpPost]
@@ -40,9 +39,8 @@ namespace HeatingSystemWebApp.Controllers
             if (login == null)
             {
                 ViewBag.ErrorMessage = "User Not Found";
-                return View();
             }
-            return this.RedirectToAction("Index", new { id = login.Id });
+            return this.RedirectToAction("MeterReadingsController", new { id = login.Id });
         }
     }
 }

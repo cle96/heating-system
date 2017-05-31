@@ -143,9 +143,8 @@ namespace HeatingSystemAdministration
                 using (var db = new StorageContext())
                 {
                     MetersReadingsListBox.Items.Clear();
-                    List<MeterReading> meterReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
-                    meterReadings.ForEach(mr =>
-                    { MetersReadingsListBox.Items.Add(new ListBoxItem() {Content=mr,Background = mr.isEnabled? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightGreen): new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightSalmon) }); });
+                    List<MeterReading> meterReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).OrderByDescending(m => m.Year).ToList();
+                    meterReadings.ForEach(mr =>{ MetersReadingsListBox.Items.Add(new ListBoxItem() {Content=mr,Background = mr.isEnabled? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightGreen): new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightSalmon) }); });
                 }
             }
         }

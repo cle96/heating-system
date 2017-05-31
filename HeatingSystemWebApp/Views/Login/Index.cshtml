@@ -1,4 +1,4 @@
-﻿@model HeatingSystemAdministration.Meter
+﻿@model HeatingSystemModel.Model.Meter
 <!DOCTYPE html>
 
 <html>
@@ -11,9 +11,9 @@
         @using (Html.BeginForm())
         {
             <div>
-                <div>@Html.LabelFor(m => m.Id)</div>
-                <div>@Html.EditorFor(m => m.Id)</div>
-                <div style="color:red">@ViewBag.ErrorMessage</div>
+                @Html.Label("Meter id")
+                @Html.TextBox("id")
+                
                 <input type="submit" value="Login" />
             </div>
         }

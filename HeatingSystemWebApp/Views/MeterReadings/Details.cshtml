@@ -1,0 +1,58 @@
+﻿@model HeatingSystemModel.Model.MeterReading
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MeterReading</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.kWh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kWh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CubeMeters)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CubeMeters)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsageHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsageHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isEnabled)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
