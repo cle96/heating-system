@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HeatingSystemModel.Storage;
 
 namespace HeatingSystemAdministration.Forms
 {
@@ -19,7 +20,7 @@ namespace HeatingSystemAdministration.Forms
     /// </summary>
     public partial class Statistics : Window
     {
-        Storage.StorageContext db = new Storage.StorageContext();
+        StorageContext db = new StorageContext();
 
         public Statistics(int year)
         {

@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HeatingSystemModel;
+using HeatingSystemModel.Model;
+using HeatingSystemModel.Storage;
 
 namespace HeatingSystemAdministration.Forms
 {
@@ -19,7 +22,7 @@ namespace HeatingSystemAdministration.Forms
     /// </summary>
     public partial class CreateCustomerForm : Window
     {
-        Storage.StorageContext db = new Storage.StorageContext();
+        StorageContext db = new StorageContext();
 
         public CreateCustomerForm(Customer customer)
         {

@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HeatingSystemModel;
+using HeatingSystemModel.Model;
+using HeatingSystemModel.Storage;
 
 namespace HeatingSystemAdministration
 {
@@ -22,7 +25,7 @@ namespace HeatingSystemAdministration
     public partial class MainWindow : Window
     {
         List<Customer> customers = null;
-        Storage.StorageContext db = new Storage.StorageContext();
+        StorageContext db = new StorageContext();
 
         public MainWindow()
         {

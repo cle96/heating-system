@@ -175,6 +175,10 @@
       <Project>{05cda443-dbb5-49f5-af74-6ed79d1cc29a}</Project>
       <Name>HeatingSystemAdministration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HeatingSystemModel\HeatingSystemModel.csproj">
+      <Project>{fec40b2a-5153-4baa-ac1e-ffb337df7ae4}</Project>
+      <Name>HeatingSystemModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

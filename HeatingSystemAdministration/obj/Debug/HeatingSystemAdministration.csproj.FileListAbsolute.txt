@@ -30,7 +30,6 @@ C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\o
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.g.resources
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.Properties.Resources.resources
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration.csproj.GenerateResource.Cache
-C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\HeatingSystemAdministration_Content.g.cs
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.dll
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\EntityFramework.xml
@@ -60,3 +59,7 @@ C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\o
 C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.baml
 C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.g.cs
 C:\Users\Leahu Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\obj\Debug\Forms\Statistics.baml
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\heating_system.mdf
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\heating_system_log.ldf
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\HeatingSystemModel.dll
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemAdministration\bin\Debug\HeatingSystemModel.pdb
