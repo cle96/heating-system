@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
+using System.Data.Entity.Migrations;
 
 namespace HeatingSystemAdministration.Service
 {
@@ -79,6 +80,19 @@ namespace HeatingSystemAdministration.Service
                 return db.Customers.ToList();
             }
         }
+
+        public static List<Customer> CreateOrUpdateCustomer(Customer c)
+        {
+            using (var db = new StorageContext())
+            {
+                db.Customers.AddOrUpdate(c);
+                db.SaveChanges();
+
+                return db.Customers.ToList();
+            }
+        }
+
+
         public static List<Meter> CreateMeter(int customerId)
         {
             using (var db = new StorageContext())
