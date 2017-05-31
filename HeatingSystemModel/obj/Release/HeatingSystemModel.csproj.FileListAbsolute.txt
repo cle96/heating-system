@@ -1,0 +1,13 @@
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\heating_system.mdf
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\heating_system_log.ldf
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\HeatingSystemModel.dll.config
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\HeatingSystemModel.dll
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\HeatingSystemModel.pdb
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\EntityFramework.dll
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\EntityFramework.xml
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\obj\Release\HeatingSystemModel.Migrations.InitialCreate.resources
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\obj\Release\HeatingSystemModel.csproj.GenerateResource.Cache
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\obj\Release\HeatingSystemModel.dll
+C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemModel\obj\Release\HeatingSystemModel.pdb

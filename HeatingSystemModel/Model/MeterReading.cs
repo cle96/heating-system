@@ -45,6 +45,7 @@ namespace HeatingSystemModel.Model
             String fullDescription = this.kWh + "kWh " + this.CubeMeters + "m^3 " + UsageHours + "hours for year: " + Year.Year;
             fullDescription += CoolingIsSufficient() ? " [Sufficient cooling]" : " [Insufficient cooling]";
             fullDescription += " Price: " + calculatePrice() + "kr.";
+            fullDescription += "Editing is" + (isEnabled ? " enabled" : " disabled");
             return fullDescription;
         }
     }

@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using HeatingSystemModel;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
+using System.Drawing;
 
 namespace HeatingSystemAdministration
 {
@@ -25,7 +15,6 @@ namespace HeatingSystemAdministration
     public partial class MainWindow : Window
     {
         List<Customer> customers = null;
-        StorageContext db = new StorageContext();
 
         public MainWindow()
         {
@@ -38,7 +27,7 @@ namespace HeatingSystemAdministration
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var customer = (Customer) CustomersListBox.SelectedItem;
+            var customer = (Customer)CustomersListBox.SelectedItem;
             if (customer != null)
             {
                 RefreshMetersList(customer.Id);
@@ -60,7 +49,7 @@ namespace HeatingSystemAdministration
 
         private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = (Customer) CustomersListBox.SelectedItem;
+            var customer = (Customer)CustomersListBox.SelectedItem;
             if (customer != null)
             {
                 Forms.CreateCustomerForm cw = new Forms.CreateCustomerForm(customer);
@@ -81,7 +70,7 @@ namespace HeatingSystemAdministration
 
         private void BtnCreateMeter_Click(object sender, RoutedEventArgs e)
         {
-            var customer = (Customer) CustomersListBox.SelectedItem;
+            var customer = (Customer)CustomersListBox.SelectedItem;
             if (customer != null)
             {
                 Service.Service.CreateMeter(customer.Id);
@@ -97,13 +86,7 @@ namespace HeatingSystemAdministration
             {
                 if (yearFromTextBox != null)
                 {
-                    int year = Convert.ToInt32(yearFromTextBox);
-                    DateTime newYearDate = new DateTime(year, 1, 1);
-                    db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year == year).Count() == 0).ToList().ForEach(m =>
-                    {
-                        Service.Service.CreateMeterReading(m.Id,newYearDate);
-                    });
-
+                    Service.Service.EnableReadingsForYear(Convert.ToInt32(yearFromTextBox));
                     RefreshMeterReadingsList();
                 }
             }
@@ -119,13 +102,13 @@ namespace HeatingSystemAdministration
             var yearFromTextBox = YearForEnabling.Text;
             try
             {
-                    int year = Convert.ToInt32(yearFromTextBox);
-                    Forms.Statistics statistics = new Forms.Statistics(year);
-                    statistics.ShowDialog();
+                int year = Convert.ToInt32(yearFromTextBox);
+                Forms.Statistics statistics = new Forms.Statistics(year);
+                statistics.ShowDialog();
             }
             catch
             {
-               MessageBox.Show("The field must contain a valid year!", "Error while saving", MessageBoxButton.OK);
+                MessageBox.Show("The field must contain a valid year!", "Error while saving", MessageBoxButton.OK);
             }
         }
 
@@ -159,7 +142,10 @@ namespace HeatingSystemAdministration
             {
                 using (var db = new StorageContext())
                 {
-                    MetersReadingsListBox.ItemsSource = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
+                    MetersReadingsListBox.Items.Clear();
+                    List<MeterReading> meterReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).ToList();
+                    meterReadings.ForEach(mr =>
+                    { MetersReadingsListBox.Items.Add(new ListBoxItem() {Content=mr,Background = mr.isEnabled? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightGreen): new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightSalmon) }); });
                 }
             }
         }

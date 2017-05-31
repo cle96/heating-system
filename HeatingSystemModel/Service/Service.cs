@@ -114,8 +114,26 @@ namespace HeatingSystemAdministration.Service
                 int id = db.MeterReadings.Max(mr => mr.Id);
                 Meter meter = db.Meters.Where(m => m.Id == meterId).First();
 
-                MeterReading newMeterReading = new MeterReading() { Id = id+1, CubeMeters = 0, kWh = 0, Meter = meter, UsageHours = 0, Year = newYearDate };
+                MeterReading newMeterReading = new MeterReading() { Id = id+1, CubeMeters = 0, kWh = 0, Meter = meter, UsageHours = 0, Year = newYearDate, isEnabled=false };
                 db.MeterReadings.Add(newMeterReading);
+                db.SaveChanges();
+
+                return db.MeterReadings.ToList();
+            }
+        }
+
+        public static List<MeterReading> EnableReadingsForYear(int year)
+        {
+            using (var db = new StorageContext())
+            {
+                DateTime newYearDate = new DateTime(year, 1, 1);
+                db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year == year).Count() == 0).ToList().ForEach(m =>
+                {
+                    CreateMeterReading(m.Id, newYearDate);
+                });
+
+
+                db.MeterReadings.Where(mr => mr.Year.Year == year).ToList().ForEach(mr => mr.isEnabled = true);
                 db.SaveChanges();
 
                 return db.MeterReadings.ToList();
@@ -168,6 +186,14 @@ namespace HeatingSystemAdministration.Service
             using (var db = new StorageContext())
             {
                 return db.MeterReadings.ToList();
+            }
+        }
+
+        private static List<MeterReading> GetMeterReadingsForYear(int year)
+        {
+            using (var db = new StorageContext())
+            {
+                return db.MeterReadings.Where(mr => mr.Year.Year == year).ToList();
             }
         }
     }
