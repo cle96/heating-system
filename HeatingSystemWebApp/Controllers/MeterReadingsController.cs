@@ -68,35 +68,9 @@ namespace HeatingSystemWebApp.Controllers
             {
                 db.Entry(meterReading).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"+"?meterId="+meterReading.Id);
             }
             return View(meterReading);
-        }
-
-        // GET: MeterReadings/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MeterReading meterReading = db.MeterReadings.Find(id);
-            if (meterReading == null)
-            {
-                return HttpNotFound();
-            }
-            return View(meterReading);
-        }
-
-        // POST: MeterReadings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            MeterReading meterReading = db.MeterReadings.Find(id);
-            db.MeterReadings.Remove(meterReading);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
