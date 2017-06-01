@@ -66,7 +66,7 @@ namespace HeatingSystemWebApp.Controllers
         public ActionResult Edit([Bind(Include = "Id,kWh,CubeMeters,UsageHours")] MeterReading meterReading)
         {
             if(meterReading != null) { 
-                HeatingSystemModel.Service.Service.UpdateMeterReading(meterReading);
+                Service.UpdateMeterReading(meterReading);
                 return RedirectToAction("Index", new { meterId = meterReading.Meter.Id });
             }
             return View(meterReading);

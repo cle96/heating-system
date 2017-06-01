@@ -34,7 +34,19 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2" Margin="5">
+            <Grid>
             <Label>Readings</Label>
+                 
+                <Label HorizontalAlignment="Right" Margin="0,0,180,0" Content="Legend:"/>
+                <Grid Margin="280,0,107,0">
+                    <Rectangle Fill="Salmon" />
+                    <TextBlock Text="Unabled" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Margin="355,0,32,0">
+                    <Rectangle   Fill="LightGreen"/>
+                    <TextBlock Text="Enabled" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                </Grid>
+            </Grid>
             <ListBox Name="MetersReadingsListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="413" Margin="5,5,0,5" Height="239" />
             <Grid >
                 <Label>Year:</Label>
