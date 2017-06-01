@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HeatingSystemModel.Storage;
-
+using HeatingSystemModel.Service;
 namespace HeatingSystemAdministration.Forms
 {
     /// <summary>
@@ -31,21 +31,21 @@ namespace HeatingSystemAdministration.Forms
         }
         public void setTotalConsumptionForYear(int year)
         {
-            var meterReadings = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year);
+            var meterReadings = Service.GetMeterReadings().Where(mr => mr.Year.Year == year);
             double totalConsumption = meterReadings.Sum(mr => mr.kWh);
             lblTotalConsumption.Content = "Total consumption for year " + year + " is: " + totalConsumption +"kWh";
         }
         public void setMoneySpentForYear(int year)
         {
-            var meterReadings = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year);
+            var meterReadings = Service.GetMeterReadings().Where(mr => mr.Year.Year == year);
             double moneySpent = meterReadings.Sum(mr => mr.calculatePrice());
             lblMoneySpent.Content = "Money spent for year " + year + " is: " + moneySpent + "kr.";
         }
 
         public void setPercentageForCooling(int year)
         {
-            var coolingSufficientMetersCount = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year && !mr.CoolingIsSufficient()).Select(mr=> mr.Id).Distinct().ToList().Count();
-            var allMetersCount = Service.Service.GetMeterReadings().Where(mr => mr.Year.Year == year).Select(mr => mr.Id).Distinct().ToList().Count();
+            var coolingSufficientMetersCount = Service.GetMeterReadings().Where(mr => mr.Year.Year == year && !mr.CoolingIsSufficient()).Select(mr=> mr.Id).Distinct().ToList().Count();
+            var allMetersCount = Service.GetMeterReadings().Where(mr => mr.Year.Year == year).Select(mr => mr.Id).Distinct().ToList().Count();
             var percentage = coolingSufficientMetersCount == 0?0:(coolingSufficientMetersCount / allMetersCount) * 100;
 
             lblPercentage.Content = percentage + "% have insufficient cooling ";

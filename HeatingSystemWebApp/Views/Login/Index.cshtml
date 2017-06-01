@@ -1,5 +1,4 @@
-﻿@model HeatingSystemModel.Model.Meter
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -8,13 +7,14 @@
 </head>
 <body>
     <div>
-      @using (Html.BeginForm())
+      @using (Html.BeginForm("Index", "MeterReadings"))
       {
-                @Html.Label("Meter id")
-                @Html.TextBox("Id")
-
-              <input type="submit" name="submit" value="Submit" />
+        <label>Please enter your meter unique id</label>
+        <input type="number" name="meterId" required/>
+        <input type="submit" value="Proceed to the readings">
       }
+
+      
     </div>
 </body>
 </html>

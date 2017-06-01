@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
+using HeatingSystemModel.Service;
 using System.Drawing;
 
 namespace HeatingSystemAdministration
@@ -63,7 +64,7 @@ namespace HeatingSystemAdministration
             var customer = (Customer)CustomersListBox.SelectedItem;
             if (customer != null)
             {
-                Service.Service.DeleteCustomer(customer.Id);
+                Service.DeleteCustomer(customer.Id);
                 RefreshCustomerList(); RefreshMetersList(customer.Id);
             }
         }
@@ -73,7 +74,7 @@ namespace HeatingSystemAdministration
             var customer = (Customer)CustomersListBox.SelectedItem;
             if (customer != null)
             {
-                Service.Service.CreateMeter(customer.Id);
+                Service.CreateMeter(customer.Id);
                 RefreshMetersList(customer.Id);
             }
 
@@ -86,7 +87,7 @@ namespace HeatingSystemAdministration
             {
                 if (yearFromTextBox != null)
                 {
-                    Service.Service.EnableReadingsForYear(Convert.ToInt32(yearFromTextBox));
+                    Service.EnableReadingsForYear(Convert.ToInt32(yearFromTextBox));
                     RefreshMeterReadingsList();
                 }
             }

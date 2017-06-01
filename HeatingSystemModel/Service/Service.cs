@@ -8,7 +8,7 @@ using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
 using System.Data.Entity.Migrations;
 
-namespace HeatingSystemAdministration.Service
+namespace HeatingSystemModel.Service
 {
     public class Service
     {
@@ -118,6 +118,22 @@ namespace HeatingSystemAdministration.Service
                 db.MeterReadings.Add(newMeterReading);
                 db.SaveChanges();
 
+                return db.MeterReadings.ToList();
+            }
+        }
+
+        public static List<MeterReading> UpdateMeterReading(MeterReading newMeterReadingData)
+        {
+            using (var db = new StorageContext())
+            {
+                var m = db.MeterReadings.Find(newMeterReadingData.Id);
+                if (m != null)
+                {
+                    m.kWh = newMeterReadingData.kWh;
+                    m.CubeMeters = newMeterReadingData.CubeMeters;
+                    m.UsageHours = newMeterReadingData.UsageHours;
+                    db.SaveChanges();
+                }
                 return db.MeterReadings.ToList();
             }
         }

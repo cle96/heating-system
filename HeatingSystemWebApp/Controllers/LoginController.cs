@@ -12,24 +12,9 @@ namespace HeatingSystemWebApp.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            return View(new Meter());
+            return View();
         }
 
-       [HttpPost]
-        public ActionResult Index(Meter m)
-        {
-            Meter login;
-            using (var db = new StorageContext())
-            {
-                login = db.Meters.Where(meter => meter.Id == m.Id).First();
-            }
 
-            if (login == null)
-            {
-                ViewBag.ErrorMessage = "User Not Found";
-                return View(new Meter());
-            }
-            return RedirectToAction("Index", "MeterReadings", new { meterId = m.Id },);
-        }
     }
 }

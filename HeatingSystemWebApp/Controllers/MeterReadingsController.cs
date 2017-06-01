@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
+using HeatingSystemModel.Service;
 
 namespace HeatingSystemWebApp.Controllers
 {
@@ -62,12 +63,10 @@ namespace HeatingSystemWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,kWh,CubeMeters,UsageHours,Year")] MeterReading meterReading)
+        public ActionResult Edit([Bind(Include = "Id,kWh,CubeMeters,UsageHours")] MeterReading meterReading)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(meterReading).State = EntityState.Modified;
-                db.SaveChanges();
+            if(meterReading != null) { 
+                HeatingSystemModel.Service.Service.UpdateMeterReading(meterReading);
                 return RedirectToAction("Index", new { meterId = meterReading.Meter.Id });
             }
             return View(meterReading);

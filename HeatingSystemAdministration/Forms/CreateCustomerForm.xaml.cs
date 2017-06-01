@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using HeatingSystemModel.Model;
 using HeatingSystemModel.Storage;
-
+using HeatingSystemModel.Service;
 namespace HeatingSystemAdministration.Forms
 {
     /// <summary>
@@ -27,7 +27,7 @@ namespace HeatingSystemAdministration.Forms
                 MessageBox.Show("Name or address can't be null", "Error while saving", MessageBoxButton.OK);
             else
             {
-                Service.Service.CreateOrUpdateCustomer(customer);
+                Service.CreateOrUpdateCustomer(customer);
 
                 this.Close();
             }
