@@ -20,7 +20,7 @@ namespace HeatingSystemAdministration
         public MainWindow()
         {
             InitializeComponent();
-            //Service.Service.InitStorage();
+            //Service.InitStorage();
             RefreshCustomerList();
             CustomersListBox.DisplayMemberPath = "Name";
             MetersListBox.DisplayMemberPath = "Id";
@@ -144,7 +144,7 @@ namespace HeatingSystemAdministration
                 using (var db = new StorageContext())
                 {
                     MetersReadingsListBox.Items.Clear();
-                    List<MeterReading> meterReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).OrderByDescending(m => m.Year).ToList();
+                    List<MeterReading> meterReadings = db.MeterReadings.Where(mr => mr.Meter.Id == meter.Id).OrderByDescending(m => m.Date).ToList();
                     meterReadings.ForEach(mr =>{ MetersReadingsListBox.Items.Add(new ListBoxItem() {Content=mr,Background = mr.isEnabled? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightGreen): new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.LightSalmon) }); });
                 }
             }

@@ -32,20 +32,20 @@ namespace HeatingSystemModel.Service
             Customer c4 = new Customer() { Id = 4, Name = "Hilary Clinton", Address = "No house", Meters = new List<Meter>() };
 
             Meter m01 = new Meter() { Id = 1,  Customer = c1, MeterReadings = new List<MeterReading>() };
-            MeterReading mr01 = new MeterReading() { Id = 1, CubeMeters = 5.21, kWh = 553.2, UsageHours = 22, Year = new DateTime(2016, 1, 18), Meter=m01 };
+            MeterReading mr01 = new MeterReading() { Id = 1, CubeMeters = 5.21, kWh = 553.2, UsageHours = 22, Date = new DateTime(2016, 1, 18), Meter=m01 };
 
             Meter m1 = new Meter() { Id =2, Customer = c1, MeterReadings = new List<MeterReading>() };
-            MeterReading mr1 = new MeterReading() { Id = 2, CubeMeters = 73.21, kWh = 433.7, UsageHours = 17, Year = new DateTime(2017, 1, 18),Meter= m1 };
+            MeterReading mr1 = new MeterReading() { Id = 2, CubeMeters = 73.21, kWh = 4133.7, UsageHours = 17, Date = new DateTime(2017, 1, 18),Meter= m1 };
          
             Meter m2 = new Meter() { Id = 3, Customer = c2, MeterReadings = new List<MeterReading>() };
-            MeterReading mr2 = new MeterReading() { Id = 3, CubeMeters = 13.89, kWh = 221, UsageHours = 9, Year = new DateTime(2016, 1, 18), Meter = m2 };
+            MeterReading mr2 = new MeterReading() { Id = 3, CubeMeters = 13.89, kWh = 221, UsageHours = 9, Date = new DateTime(2016, 1, 18), Meter = m2 };
 
             Meter m3 = new Meter() { Id = 4, Customer = c3, MeterReadings = new List<MeterReading>() };
-            MeterReading mr3 = new MeterReading() { Id = 4, CubeMeters = 9.33, kWh = 114.5, UsageHours = 10, Year = new DateTime(2016, 1, 18), Meter = m3 };
+            MeterReading mr3 = new MeterReading() { Id = 4, CubeMeters = 9.33, kWh = 114.5, UsageHours = 10, Date = new DateTime(2016, 1, 18), Meter = m3 };
 
             Meter m4 = new Meter() { Id = 5, Customer = c4, MeterReadings = new List<MeterReading>() };
-            MeterReading mr4 = new MeterReading() { Id = 5, CubeMeters = 88.1, kWh = 1011.2, UsageHours = 12, Year = new DateTime(2016, 1, 18),Meter= m4 };
-            MeterReading mr42 = new MeterReading() { Id = 6, CubeMeters = 155.2, kWh = 2112.7, UsageHours = 42, Year = new DateTime(2017, 1, 18), Meter = m4 };
+            MeterReading mr4 = new MeterReading() { Id = 5, CubeMeters = 88.1, kWh = 1011.2, UsageHours = 12, Date = new DateTime(2016, 1, 18),Meter= m4 };
+            MeterReading mr42 = new MeterReading() { Id = 6, CubeMeters = 155.2, kWh = 2112.7, UsageHours = 42, Date = new DateTime(2017, 1, 18), Meter = m4 };
 
             AddCustomer(c1); AddCustomer(c2); AddCustomer(c3); AddCustomer(c4);
             AddMeter(m01); AddMeter(m1); AddMeter(m2); AddMeter(m3); AddMeter(m4);
@@ -114,7 +114,7 @@ namespace HeatingSystemModel.Service
                 int id = db.MeterReadings.Max(mr => mr.Id);
                 Meter meter = db.Meters.Where(m => m.Id == meterId).First();
 
-                MeterReading newMeterReading = new MeterReading() { Id = id+1, CubeMeters = 0, kWh = 0, Meter = meter, UsageHours = 0, Year = newYearDate, isEnabled=false };
+                MeterReading newMeterReading = new MeterReading() { Id = id+1, CubeMeters = 0, kWh = 0, Meter = meter, UsageHours = 0, Date = newYearDate, isEnabled=false };
                 db.MeterReadings.Add(newMeterReading);
                 db.SaveChanges();
 
@@ -143,13 +143,13 @@ namespace HeatingSystemModel.Service
             using (var db = new StorageContext())
             {
                 DateTime newYearDate = new DateTime(year, 1, 1);
-                db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Year.Year == year).Count() == 0).ToList().ForEach(m =>
+                db.Meters.Where(m => m.MeterReadings.Where(mr => mr.Date.Year == year).Count() == 0).ToList().ForEach(m =>
                 {
                     CreateMeterReading(m.Id, newYearDate);
                 });
 
 
-                db.MeterReadings.Where(mr => mr.Year.Year == year).ToList().ForEach(mr => mr.isEnabled = true);
+                db.MeterReadings.Where(mr => mr.Date.Year == year).ToList().ForEach(mr => mr.isEnabled = true);
                 db.SaveChanges();
 
                 return db.MeterReadings.ToList();
@@ -205,11 +205,11 @@ namespace HeatingSystemModel.Service
             }
         }
 
-        private static List<MeterReading> GetMeterReadingsForYear(int year)
+        public static List<MeterReading> GetMeterReadingsForYear(int year)
         {
             using (var db = new StorageContext())
             {
-                return db.MeterReadings.Where(mr => mr.Year.Year == year).ToList();
+                return db.MeterReadings.Where(mr => mr.Date.Year == year).ToList();
             }
         }
     }

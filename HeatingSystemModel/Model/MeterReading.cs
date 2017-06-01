@@ -12,7 +12,7 @@ namespace HeatingSystemModel.Model
         public double kWh { get; set; }
         public double CubeMeters { get; set; }
         public double UsageHours { get; set; }
-        public System.DateTime Year { get; set; }
+        public System.DateTime Date { get; set; }
 
         public virtual Meter Meter { get; set; }
 
@@ -42,7 +42,7 @@ namespace HeatingSystemModel.Model
 
         public override string ToString()
         {
-            String fullDescription = this.kWh + "kWh " + this.CubeMeters + "m^3 " + UsageHours + "hours for year: " + Year.Year;
+            String fullDescription = this.kWh + "kWh " + this.CubeMeters + "m^3 " + UsageHours + "hours for year: " + Date.Year;
             fullDescription += CoolingIsSufficient() ? " [Sufficient cooling]" : " [Insufficient cooling]";
             fullDescription += " Price: " + calculatePrice() + "kr.";
             fullDescription += "Editing is" + (isEnabled ? " enabled" : " disabled");

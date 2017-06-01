@@ -19,7 +19,7 @@ namespace HeatingSystemWebApp.Controllers
         // GET: MeterReadings
         public ActionResult Index(int meterId)
         {
-            return View(db.MeterReadings.Where(m=>m.Meter.Id == meterId).ToList());
+            return View(db.MeterReadings.Where(m => m.Meter.Id == meterId).ToList().OrderBy(m => m.Date.Year));
         }
 
         // GET: MeterReadings/Details/5

@@ -31,24 +31,24 @@ namespace HeatingSystemAdministration.Forms
         }
         public void setTotalConsumptionForYear(int year)
         {
-            var meterReadings = Service.GetMeterReadings().Where(mr => mr.Year.Year == year);
+            var meterReadings = Service.GetMeterReadingsForYear(year);
             double totalConsumption = meterReadings.Sum(mr => mr.kWh);
             lblTotalConsumption.Content = "Total consumption for year " + year + " is: " + totalConsumption +"kWh";
         }
         public void setMoneySpentForYear(int year)
         {
-            var meterReadings = Service.GetMeterReadings().Where(mr => mr.Year.Year == year);
+            var meterReadings = Service.GetMeterReadingsForYear(year);
             double moneySpent = meterReadings.Sum(mr => mr.calculatePrice());
             lblMoneySpent.Content = "Money spent for year " + year + " is: " + moneySpent + "kr.";
         }
 
         public void setPercentageForCooling(int year)
         {
-            var coolingSufficientMetersCount = Service.GetMeterReadings().Where(mr => mr.Year.Year == year && !mr.CoolingIsSufficient()).Select(mr=> mr.Id).Distinct().ToList().Count();
-            var allMetersCount = Service.GetMeterReadings().Where(mr => mr.Year.Year == year).Select(mr => mr.Id).Distinct().ToList().Count();
-            var percentage = coolingSufficientMetersCount == 0?0:(coolingSufficientMetersCount / allMetersCount) * 100;
+            int coolingSufficientMetersCount = Service.GetMeterReadingsForYear(year).Where(mr => mr.CoolingIsSufficient()).Select(mr=> mr.Id).Distinct().ToList().Count();
+            int allMetersCount = Service.GetMeterReadingsForYear(year).Select(mr => mr.Id).Distinct().ToList().Count();
+            var percentage = ((double)coolingSufficientMetersCount / allMetersCount) * 100;
 
-            lblPercentage.Content = percentage + "% have insufficient cooling ";
+            lblPercentage.Content = Convert.ToInt32(Math.Round(percentage, 0)) + "% have sufficient cooling ";
         }
     }
 }
