@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-      @using (Html.BeginForm("Index", "MeterReadings"))
+      @using (@Html.BeginForm("Index", "MeterReadings"))
       {
         <label>Please enter your meter unique id</label>
         <input type="number" name="meterId" required/>

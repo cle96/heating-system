@@ -19,7 +19,7 @@ namespace HeatingSystemWebApp.Controllers
         // GET: MeterReadings
         public ActionResult Index(int meterId)
         {
-            return View(db.MeterReadings.Where(m => m.Meter.Id == meterId).ToList().OrderBy(m => m.Date.Year));
+            return View(db.MeterReadings.Where(m => m.Meter.Id == meterId).ToList().OrderBy(m => m.Date.Year).ToList());
         }
 
         // GET: MeterReadings/Details/5
@@ -66,8 +66,8 @@ namespace HeatingSystemWebApp.Controllers
         public ActionResult Edit([Bind(Include = "Id,kWh,CubeMeters,UsageHours")] MeterReading meterReading)
         {
             if(meterReading != null) { 
-                Service.UpdateMeterReading(meterReading);
-                return RedirectToAction("Index", new { meterId = meterReading.Meter.Id });
+                int _id = Service.UpdateMeterReading(meterReading);
+                return RedirectToAction("Index","ReadingAcknowledging", new { meterId = _id,meterReadingId = meterReading.Id });
             }
             return View(meterReading);
         }

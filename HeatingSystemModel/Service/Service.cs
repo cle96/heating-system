@@ -122,7 +122,7 @@ namespace HeatingSystemModel.Service
             }
         }
 
-        public static List<MeterReading> UpdateMeterReading(MeterReading newMeterReadingData)
+        public static int UpdateMeterReading(MeterReading newMeterReadingData)
         {
             using (var db = new StorageContext())
             {
@@ -133,9 +133,11 @@ namespace HeatingSystemModel.Service
                     m.CubeMeters = newMeterReadingData.CubeMeters;
                     m.UsageHours = newMeterReadingData.UsageHours;
                     db.SaveChanges();
+
+                    return m.Meter.Id;
                 }
-                return db.MeterReadings.ToList();
             }
+            return 0;
         }
 
         public static List<MeterReading> EnableReadingsForYear(int year)

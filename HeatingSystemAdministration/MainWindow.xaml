@@ -37,7 +37,7 @@
             <Grid>
             <Label>Readings</Label>
                  
-                <Label HorizontalAlignment="Right" Margin="0,0,180,0" Content="Legend:"/>
+                <Label HorizontalAlignment="Right" Margin="0,0,180,0" Content="Meter Reading Legend:"/>
                 <Grid Margin="280,0,107,0">
                     <Rectangle Fill="Salmon" />
                     <TextBlock Text="Unabled" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
