@@ -31,14 +31,13 @@ namespace HeatingSystemWebApp.Controllers
                         double lastMeterReadingKWH = lastMeterReading.kWh;
                         double actualMeterReadingKWH = actualMeterReading.kWh;
 
-                        double percentage = (lastMeterReadingKWH / actualMeterReadingKWH) * 100;
+                        double percentage = (actualMeterReadingKWH / lastMeterReadingKWH) * 100;
 
                         if (percentage > 30)
                             textDisplayed = "This year consumption is 30% higher than last registration!";
-                    }else
-                    {
-                        textDisplayed = "Succesfully updated !";
                     }
+                    if (textDisplayed == "")
+                        textDisplayed = "Succesfully updated the meter reading";
                 }
             }
             @ViewBag.MyLabelAck = textDisplayed;
