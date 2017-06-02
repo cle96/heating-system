@@ -20,7 +20,7 @@ namespace HeatingSystemAdministration
         public MainWindow()
         {
             InitializeComponent();
-            //Service.InitStorage();
+            Service.InitStorage();
             RefreshCustomerList();
             CustomersListBox.DisplayMemberPath = "Name";
             MetersListBox.DisplayMemberPath = "Id";
@@ -126,6 +126,8 @@ namespace HeatingSystemAdministration
                 customers = db.Customers.OrderBy(c => c.Id).ToList();
                 CustomersListBox.ItemsSource = customers;
             }
+
+            RefreshMeterReadingsList();
         }
 
         private void RefreshMetersList(int customerId)
