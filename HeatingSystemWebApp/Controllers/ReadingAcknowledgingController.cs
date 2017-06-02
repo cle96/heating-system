@@ -34,7 +34,7 @@ namespace HeatingSystemWebApp.Controllers
                         double percentage = (actualMeterReadingKWH / lastMeterReadingKWH) * 100;
 
                         if (percentage > 30)
-                            textDisplayed = "This year consumption is 30% higher than last registration!";
+                            textDisplayed = "This year consumption is " +percentage.ToString()+ "% higher than last registration! Make sure data is inserted correctly";
                     }
                     if (textDisplayed == "")
                         textDisplayed = "Succesfully updated the meter reading";

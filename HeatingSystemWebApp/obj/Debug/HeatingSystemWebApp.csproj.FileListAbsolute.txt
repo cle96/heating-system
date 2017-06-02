@@ -1,4 +1,0 @@
-C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Cristian\Source\Repos\exam-heating-system\HeatingSystemWebApp\bin\roslyn\VBCSCompiler.exe
